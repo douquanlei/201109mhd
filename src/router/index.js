@@ -21,7 +21,8 @@ const router = new VueRouter({
       component: Hello,
       children: [
         { path: 'history', component: History },
-        { path: 'favorite', component: Favorite }
+        { path: 'favorite', component: Favorite },
+        { path: '', redirect: '/hello/favorite' }
       ]
     },
     { path: '/favorite', component: Favorite },
@@ -32,7 +33,7 @@ const router = new VueRouter({
     { path: '/resigter', component: Resigter },
     { path: '/search-result', component: SearchResult },
     { path: '/vip', component: Vip },
-    { path: '/', redirect: Home }
+    { path: '/', redirect: '/home' }
   ]
 })
 export default router

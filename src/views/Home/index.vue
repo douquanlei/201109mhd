@@ -11,15 +11,29 @@
         <div class="header-search"></div>
       </a>
     </header>
+    <Swiper>
+      <Swiperitem>1 </Swiperitem>
+      <Swiperitem>2 </Swiperitem>
+      <Swiperitem>3 </Swiperitem>
+    </Swiper>
+    <Swiper>
+      <Swiperitem>1 </Swiperitem>
+      <Swiperitem>2 </Swiperitem>
+      <Swiperitem>3 </Swiperitem>
+    </Swiper>
   </div>
 </template>
 
 <script>
+import { Swiper, Swiperitem } from '@/components/Swiper'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Swiper,
+    Swiperitem
+  }
 }
 </script>
-
 <style lang='scss' scoped>
 .page-home{
   display: flex;

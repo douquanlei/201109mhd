@@ -11,35 +11,77 @@
         <div class="header-search"></div>
       </a>
     </header>
-    <Swiper>
-      <Swiperitem>1 </Swiperitem>
-      <Swiperitem>2 </Swiperitem>
-      <Swiperitem>3 </Swiperitem>
-    </Swiper>
-    <Swiper>
-      <Swiperitem>1 </Swiperitem>
-      <Swiperitem>2 </Swiperitem>
-      <Swiperitem>3 </Swiperitem>
+    <Swiper class='my-swiper' v-if='bannerList.length>0' :autoplay='2000'>
+      <Swiperitem v-for="item in bannerList" :key='item.id'>
+        <img
+          :src='item.imageurl'
+          alt
+         />
+      </Swiperitem>
     </Swiper>
   </div>
 </template>
 
 <script>
 import { Swiper, Swiperitem } from '@/components/Swiper'
+import { getBanner } from '@/api/cartoon'
 export default {
   name: 'Home',
+  data () {
+    return {
+      bannerList: []
+    }
+  },
   components: {
     Swiper,
     Swiperitem
+  },
+  created () {
+    getBanner().then(res => {
+      if (res.code === 200) {
+        this.bannerList = res.info
+      } else {
+        alert(res.code_msg)
+      }
+      console.log(res)
+    }).catch((err) => {
+      alert('网络异常，请稍后', err)
+    })
+    // fetch('https://mhd.zhuishushenqi.com/comic_v2/getproad?apptype=8&appversion=1.0&channel=web-app&adgroupid=123')
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log(res)
+    //   }),
+    // fetch('/migu/today/')
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log(res)
+    //   })
   }
 }
 </script>
 <style lang='scss' scoped>
+@import "~@/assets/styles/mixins.scss";
 .page-home{
+  .my-swiper img{
+    width: 100%;;
+  }
   display: flex;
   flex-direction: column;
   height: 100%;
   .index-header {
+    @include  border-bottom;
+    // position: relative;
+    // &::after{
+    //   content: "";
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 1px;
+    //   left: 0px;
+    //   bottom: 0px;
+    //   background-color: #ededed;
+    //   transform:scaleY(0.5)
+    // }
     display: flex;
     height: 44px;
     //三者等分平铺
